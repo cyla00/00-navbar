@@ -37,17 +37,6 @@ export default defineComponent({
             this.scrollPosition = false
             return
         },
-        scrollTop(){
-            (document.getElementById('accueil') as any)?.scrollIntoView({ behavior: "smooth" })
-        },
-        async scrollService(){
-            if(document.getElementById('services')){
-                (document.getElementById('services') as any)?.scrollIntoView({ behavior: "smooth" })
-                return
-            }
-            window.location.href = "/";
-            return
-        },
     },
     created(){
         this.checkScreen()
@@ -59,20 +48,38 @@ export default defineComponent({
 
 
 <template>
-    <header :class="{'header-dark': this.dark, 'scrolled-nav': scrollPosition}">
+    <header :class="{'header-dark': this.dark, 'scrolled-nav': scrollPosition, 'mobile-size': mobile}">
         <meta name="header section" content="navigation menu with pages routes">
+
         <nav :class="{'mobile-nav': mobile}">
-            <div class="logo-wrapper wrappers">
+            <div class="logo-wrapper wrappers" v-show="!mobile">
                 <img class="logo-image" src="https://placehold.jp/100x50.png" alt="main company logo">
             </div>
 
-            <div class="links-wrapper">
+            <div class="links-wrapper" v-show="!mobile">
                 <router-link :class="{'a-dark' : this.dark}" to="/">route1</router-link>
                 <router-link :class="{'a-dark' : this.dark}" to="/">route2</router-link>
                 <router-link :class="{'a-dark' : this.dark}" to="/">route3</router-link>
                 <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
                 <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
             </div>
+
+            <div class="icon" :class="{'icon-dark': this.dark}">
+                <i @click="toggleMobileNav" v-show="mobile" class='bx bx-menu bx-md' :class="{'icon-active': mobileNav}"></i>
+            </div>
+
+            <Transition name="mobile-nav">
+                <div class="mobile-links-wrapper" v-show="mobileNav" :class="{'mobile-links-wrapper-dark' : this.dark}">
+                    <div class="logo-wrapper wrappers" v-show="mobile">
+                        <img class="mobile-logo-image" src="https://placehold.jp/100x50.png" alt="main company logo">
+                    </div>
+                    <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
+                    <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
+                    <router-link :class="{'a-dark' : this.dark}" to="/">route1</router-link>
+                    <router-link :class="{'a-dark' : this.dark}" to="/">route2</router-link>
+                    <router-link :class="{'a-dark' : this.dark}" to="/">route3</router-link>
+                </div>
+            </Transition>
         </nav>
     </header>
 </template>
@@ -191,5 +198,62 @@ a.router-link-exact-active {
 .logo-image{
     margin: auto;
     display: block;
+}
+
+.icon{
+	display: flex;
+	top: 0;
+	align-items: center;
+	right: 24px;
+	height: 100%;
+	color: var(--a-text-color-light);
+    padding: 5px;
+    margin: 10px;
+    border-radius: 100px;
+}
+.icon-dark{
+    color: var(--a-text-color-dark);
+}
+.icon-active{
+	transform: rotate(180deg);
+}
+.mobile-nav{
+    justify-content: flex-end;
+}
+.mobile-links-wrapper{
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	width: 100%;
+	max-width: 250px;
+	height: 100%;
+	background: var(--header-bg-light);
+	top: 0;
+	left: 0;
+	margin: 0;
+    border-radius: 0px 20px 20px 0px;
+}
+.mobile-links-wrapper a{
+    margin-top: 15px;
+    border: none;
+    margin-inline: auto;
+}
+.mobile-logo-image{
+    margin-top: 30px;
+}
+
+.mobile-links-wrapper-dark{
+	background: var(--header-bg-dark);
+}
+
+
+.mobile-nav-enter-active, .mobile-nav-leave-active {
+	transition: 0.6s ease all;
+}
+.mobile-nav-enter-from, .mobile-nav-leave-to {
+	transform: translateX(-300px);
+}
+.mobile-nav-enter-to {
+	transform: translateX(0);
 }
 </style>

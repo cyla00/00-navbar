@@ -17,7 +17,7 @@ export default defineComponent({
 
 <template>
 <div>
-<Navbar :dark="true"/>
+<Navbar :dark="false"/>
     <h1>wwww</h1>
     <h1>wwww</h1>
     <h1>wwww</h1>
