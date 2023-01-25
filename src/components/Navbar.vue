@@ -229,7 +229,7 @@ a.router-link-exact-active {
     padding: 10px 20px;
 }
 .mobile-links-wrapper a{
-    margin-top: 15px;
+    margin-top: 10px;
     border: none;
     margin-inline: auto;
 }
