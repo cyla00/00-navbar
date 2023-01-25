@@ -58,8 +58,6 @@ export default defineComponent({
 
             <div class="links-wrapper" v-show="!mobile">
                 <router-link :class="{'a-dark' : this.dark}" to="/">route1</router-link>
-                <router-link :class="{'a-dark' : this.dark}" to="/">route2</router-link>
-                <router-link :class="{'a-dark' : this.dark}" to="/">route3</router-link>
                 <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
                 <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
             </div>
@@ -73,11 +71,9 @@ export default defineComponent({
                     <div class="logo-wrapper wrappers" v-show="mobile">
                         <img class="mobile-logo-image" src="https://placehold.jp/100x50.png" alt="main company logo">
                     </div>
-                    <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
-                    <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
-                    <router-link :class="{'a-dark' : this.dark}" to="/">route1</router-link>
-                    <router-link :class="{'a-dark' : this.dark}" to="/">route2</router-link>
-                    <router-link :class="{'a-dark' : this.dark}" to="/">route3</router-link>
+                    <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router"><i class='bx bxl-sketch bx-xs'></i> button</button></router-link>
+                    <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router"><i class='bx bxs-chat bx-xs'></i> button</button></router-link>
+                    <router-link :class="{'a-dark' : this.dark}" to="/"><i class='bx bx-home-alt-2 bx-md'></i></router-link>
                 </div>
             </Transition>
         </nav>
@@ -89,7 +85,7 @@ header{
     /* variables */
     --header-bg-dark: #0D1520;
     --header-bg-light: #FEFEFE;
-    --a-font-size: 14px;
+    --font-size: 13px;
     --a-text-color-dark: #FEFEFE;
     --a-text-color-light: #0D1520;
     --a-text-color-active: #9E76E8;
@@ -108,7 +104,7 @@ header{
     text-decoration: none;
     background: var(--header-bg-light);
     color: #1A1C1E;
-    font-size: var(--a-font-size);
+    font-size: var(--font-size);
     position: sticky;
     top: 0;
     z-index: 99;
@@ -184,6 +180,7 @@ a.router-link-exact-active {
     cursor: pointer;
     background: var(--btn-bg-color);
     color: var(--btn-text-color-dark);
+    font-size: var(--font-size);
 }
 .btn-link{
     border: none !important;
@@ -224,14 +221,12 @@ a.router-link-exact-active {
 	display: flex;
 	flex-direction: column;
 	position: fixed;
-	width: 100%;
 	max-width: 250px;
 	height: 100%;
 	background: var(--header-bg-light);
 	top: 0;
 	left: 0;
-	margin: 0;
-    border-radius: 0px 20px 20px 0px;
+    padding: 10px 20px;
 }
 .mobile-links-wrapper a{
     margin-top: 15px;
@@ -255,5 +250,8 @@ a.router-link-exact-active {
 }
 .mobile-nav-enter-to {
 	transform: translateX(0);
+}
+i{
+    vertical-align: middle;
 }
 </style>
