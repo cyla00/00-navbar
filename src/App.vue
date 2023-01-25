@@ -16,13 +16,45 @@ export default defineComponent({
 
 
 <template>
-    <Navbar :dark="true"/>
+<div>
+<Navbar :dark="true"/>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+    <h1>wwww</h1>
+</div>
+    
 </template>
 
 <style>
 body{
     margin: 0;
     padding: 0;
+    background: gray;
 }
 
 #app {

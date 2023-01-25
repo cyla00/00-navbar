@@ -6,9 +6,9 @@ export default defineComponent({
     props: {
         dark: Boolean,
     },
-    setup(){
+    data(){
         return{
-            scrollPosition: true,
+            scrollPosition: false,
             mobile: false,
             mobileNav: false,
             windowWidth: 0,
@@ -21,7 +21,7 @@ export default defineComponent({
         checkScreen(){
             this.windowWidth = window.innerWidth
             if(this.windowWidth <= 1050){
-                this.mobile = true
+                this.mobile = true      
                 return
             }
             this.mobile = false
@@ -29,8 +29,8 @@ export default defineComponent({
             return
         },
         updateScroll(){
-            const scroll = window.scrollY 
-            if(scroll > 50){
+            const scroll = window.scrollY
+            if(scroll > 0){
                 this.scrollPosition = true
                 return
             }
@@ -50,8 +50,8 @@ export default defineComponent({
         },
     },
     created(){
-        window.addEventListener('resize', this.checkScreen)
         this.checkScreen()
+        window.addEventListener('resize', this.checkScreen)
         window.addEventListener('scroll', this.updateScroll)
     }
 })
@@ -59,19 +59,19 @@ export default defineComponent({
 
 
 <template>
-    <header :class="{'header-dark' : this.dark}">
+    <header :class="{'header-dark': this.dark, 'scrolled-nav': scrollPosition}">
         <meta name="header section" content="navigation menu with pages routes">
         <nav :class="{'mobile-nav': mobile}">
             <div class="logo-wrapper wrappers">
-                <img src="https://placehold.jp/150x60.png" alt="main company logo">
+                <img class="logo-image" src="https://placehold.jp/100x50.png" alt="main company logo">
             </div>
 
             <div class="links-wrapper">
                 <router-link :class="{'a-dark' : this.dark}" to="/">route1</router-link>
-                <router-link :class="{'a-dark' : this.dark}" to="/w">route2</router-link>
-                <router-link :class="{'a-dark' : this.dark}" to="/a">route3</router-link>
-                <router-link :class="{'a-dark' : this.dark}" class="btn-link" to="/"><button class="btn-router">button-route</button></router-link>
-                <router-link :class="{'a-dark' : this.dark}" class="btn-link" to="/"><button class="btn-router">button-route</button></router-link>
+                <router-link :class="{'a-dark' : this.dark}" to="/">route2</router-link>
+                <router-link :class="{'a-dark' : this.dark}" to="/">route3</router-link>
+                <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
+                <router-link class="btn-link" to="/"><button :class="{'btn-dark' : this.dark}" class="btn-router">button-route</button></router-link>
             </div>
         </nav>
     </header>
@@ -80,19 +80,21 @@ export default defineComponent({
 <style scoped>
 header{
     /* variables */
-    --header-bg-dark: #26252C;
+    --header-bg-dark: #0D1520;
     --header-bg-light: #FEFEFE;
     --a-font-size: 14px;
-    --a-text-color-dark: #777A84;
-    --a-text-color-light: #747474;
-    --a-text-color-active: #FF6D91;
-    --a-text-color-bottom-border: #FF6D91;
+    --a-text-color-dark: #FEFEFE;
+    --a-text-color-light: #0D1520;
+    --a-text-color-active: #9E76E8;
+    --a-text-color-bottom-border: #80838C;
 
     --btn-bg-color: trasparent;
-    --btn-border-color: #007AFF;
-    --btn-text-color: #FEFEFE;
-    --btn-bg-color-hover: gray;
-    --btn-text-color-hover: white;
+    --btn-border-color: #EA48BA;
+    --btn-text-color-dark: #FEFEFE;
+    --btn-text-color-light: #FEFEFE;
+    --btn-bg-color-hover: #9E76E8;
+    --btn-text-color-hover: #FEFEFE;
+    --btn-text-color-dark: #0D1520;
 
 
     /* attributes */
@@ -103,15 +105,23 @@ header{
     position: sticky;
     top: 0;
     z-index: 99;
-    width: 100%;
     background: #ffffff;
-    transition: .2s ease all;
+    transition: 0.2s ease all;
     margin: auto;
+
+    width: 90%;
+    border-radius: 100px;
+    margin-top: 10px;
 }
 .header-dark{
     background: var(--header-bg-dark);
 }
-
+.scrolled-nav{
+    transition: 0.2s ease all;
+    width: 100%;
+    border-radius: 0;
+    margin-top: 0;
+}
 .links-wrapper{
     margin: auto;
     margin-right: 0;
@@ -133,21 +143,22 @@ nav{
 
 
 a{
+    transition: 0.2s ease all;
     text-decoration: none;
     color: var(--a-text-color-light);
     font-weight: bold;
     text-transform: uppercase;
     margin-left: 20px;
-    border-bottom: 2px transparent;
-    padding-block: 10px;
+    border-bottom: 1px transparent;
+    padding-block: 5px;
 }
 .a-dark{
     color: var(--a-text-color-dark);
 }
 a:hover {
-    transition: 0.1s ease all;
+    transition: 0.2s ease all;
     color: var(--a-text-color-active);
-    border-bottom: solid 2px var(--a-text-color-bottom-border);
+    border-bottom: solid 1px var(--a-text-color-bottom-border);
 }
 a.router-link-exact-active {
     transition: 0.2s ease all;
@@ -165,7 +176,7 @@ a.router-link-exact-active {
     border-radius: 100px;
     cursor: pointer;
     background: var(--btn-bg-color);
-    color: var(--btn-text-color);
+    color: var(--btn-text-color-dark);
 }
 .btn-link{
     border: none !important;
@@ -173,5 +184,12 @@ a.router-link-exact-active {
 .btn-router:hover{
     background: var(--btn-bg-color-hover);
     color: var(--btn-text-color-hover);
+}
+.btn-dark{
+    color: var(--btn-text-color-light);
+}
+.logo-image{
+    margin: auto;
+    display: block;
 }
 </style>
